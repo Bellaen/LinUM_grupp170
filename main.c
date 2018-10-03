@@ -26,7 +26,7 @@ int main()
 
     resistance = calc_resistance(count, conn, array);
 
-    printf("Resistance is %f ohm\n", resistance);
+    printf("Ersättningsresistans: %f ohm\n", resistance);
 
     free(array);
 }
