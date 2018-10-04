@@ -1,5 +1,5 @@
-#ifndef __CALC_POWER_H
-#define __CALC_POWER_H
+#ifndef __LIB_POWER_H
+#define __LIB_POWER_H
 
 
 /** Vi beräknar här effektutvecklingen över en resistans
