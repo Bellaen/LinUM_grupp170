@@ -4,10 +4,10 @@
 
 float calc_power_r(float volt, float resistance)
 {
-	float power = 0;
+	float power = 0;	// Undvik att resistansen = 0
 	if (resistance > 0)
 	{
-	result = (volt * volt / resistance);
+	power = (volt * volt / resistance);
 	}
 
 	return power;
