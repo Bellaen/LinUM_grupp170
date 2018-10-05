@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "resistance.h"
+#include "libpower.h"
 
 int main()
 {
@@ -30,6 +31,13 @@ int main()
     // Output
     printf("Ers√§ttningsresistans: %f ohm\n", totalResistance);
     // End of output
+
+    // Call the power function with value from resistance.
+
+    effect = calc_power_r(volt, totalResistance);
+
+    printf("Effekten ‰r: %f Watt\n", effektct;
+   // End of power function
 
 
     free(array);
