@@ -4,12 +4,16 @@
 
 int main()
 {
+    // User form
     printf("Ange koppling [S|P]:\n");
     scanf("%c", &conn);
 
     printf("Antal komponenter:\n");
     scanf("%d", &count);
+    // End of user form
 
+
+    // Resistance
     float *array = calloc(count, sizeof(float));
 
     for (i = 0; i < count; i++)
@@ -18,10 +22,15 @@ int main()
         scanf("%f", &myResistance);
         array[i] = myResistance;
     }
-
+    
     totalResistance = calc_resistance(count, conn, array);
+    // End of resistance
 
+
+    // Output
     printf("Ersättningsresistans: %f ohm\n", totalResistance);
+    // End of output
+
 
     free(array);
 }
