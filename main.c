@@ -32,8 +32,8 @@ int main()
     printf("Ers√§ttningsresistans: %f ohm\n", totalResistance);
     // End of output
 
-    // Call the power function with value from resistance.
 
+    // Call the power function with value from resistance.
     effect = calc_power_r(volt, totalResistance);
 
     printf("Effekten ‰r: %f Watt\n", effektct;
