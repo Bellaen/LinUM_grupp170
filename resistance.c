@@ -16,9 +16,12 @@ float calc_resistance(int count, char conn, float *array)
     {
         return totalResistanceS;
     }
-    else if (conn == 'P')
+    else if (conn == 'P' && i != 0)
     {
         return totalResistanceP;
     }
-    return 1;
+    else
+    {
+        return -1;
+    }
 }
