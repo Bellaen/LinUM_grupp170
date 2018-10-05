@@ -4,29 +4,24 @@
 
 int main()
 {
-    int count;
-    char conn;
-    float resistance = 0;
-    float myResistance;
-
-    printf("Ange koppling [S/P]:\n");
+    printf("Ange koppling [S|P]:\n");
     scanf("%c", &conn);
 
-    printf("Ange antalet elektriska komponenter:\n");
+    printf("Antal komponenter:\n");
     scanf("%d", &count);
 
     float *array = calloc(count, sizeof(float));
 
-    for (int i = 0; i < count; i++)
+    for (i = 0; i < count; i++)
     {
         printf("Komponent %d i ohm:\n", i + 1);
         scanf("%f", &myResistance);
         array[i] = myResistance;
     }
 
-    resistance = calc_resistance(count, conn, array);
+    totalResistance = calc_resistance(count, conn, array);
 
-    printf("Ersättningsresistans: %f ohm\n", resistance);
+    printf("Ersättningsresistans: %f ohm\n", totalResistance);
 
     free(array);
 }

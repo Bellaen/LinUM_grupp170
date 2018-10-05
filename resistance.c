@@ -3,6 +3,22 @@
 
 float calc_resistance(int count, char conn, float *array)
 {
-    printf("%c\n", conn);
-    return array[1];
+    for (i = 0; i < count; i++)
+    {
+        resistanceS = resistanceS + array[i];
+        resistanceP = resistanceP + 1 / (array[i]);
+
+        totalResistanceS = resistanceS;
+        totalResistanceP = 1 / resistanceP;
+    }
+
+    if (conn == 'S')
+    {
+        return totalResistanceS;
+    }
+    else if (conn == 'P')
+    {
+        return totalResistanceP;
+    }
+    return 1;
 }
