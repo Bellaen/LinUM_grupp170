@@ -1,26 +1,6 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <math.h>
-#include <stdbool.h>
 #include "libcomponent.h"
 
-#define E12_SIZE 12
-
-const int const E12[] = {10, 12, 15, 18, 22, 27, 33, 39, 47, 56, 68, 82};
-
-int decimals(int resistance)
-{
-    if (resistance <= 0) return -1; 
-    
-    int p = 0;
-    while ((resistance / 10) >  0) {
-        p++;
-        resistance /= 10;
-    }
-
-    return pow(10, p);
-}
+static const float E12[] = {1.0, 1.2, 1.5, 1.8, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.8, 8.2};
 
 /*
 * origo_resistance: Ersättningsresistans
@@ -29,30 +9,109 @@ int decimals(int resistance)
 */
 int e_resistance(float orig_resistance, float *res_array)
 {
-    int count = 0;
-    bool match = false;
-    int p = decimals(orig_resistance);
-    if (p < 0) exit(EXIT_FAILURE);
-    /*
-    * Algoritm under utveckling
-    */
+    int index = 0;
+    float input = orig_resistance;
 
-    return count;
-}
+    float exponent = 0;
+    const float base = 10;
+    float multiple = pow(base, exponent);
+
+    float recent_match = 0;
+    float current_match = 0;
+    bool can_subtract = false;
+
+    bool float_state = false;
+    int iterations = 0;
+    int moved = 0;
 
 
+    while (input >= 0) {
 
-int main(void)
-{
-    float *array = malloc(sizeof(float) * 3);
-    memset(array, 0, sizeof(float) * 3);
-    e_resistance(1398, array);
+        while (!can_subtract) {
 
-    for(size_t i = 0; i < 3; i++) {
-        printf("%f\n", array[i]);
+            multiple = pow(base, exponent);
+
+            if (input >= 1) {
+
+                for(size_t i = 0; i < E12_LENGTH; i++) {
+                    current_match = E12[i] * multiple;
+
+                    // round to nearest value if no fraction part, otherwise move to fraction handler
+                    if ((input - (int) input) == 0) {
+                        if (roundf(current_match) == roundf(input)) {
+                            recent_match = current_match;
+                            can_subtract = true;
+                            input = 0;
+
+                            break;
+                        }
+                    } else {
+                        if (current_match == input) {
+                            recent_match = current_match;
+                            can_subtract = true;
+                            input = 0;
+
+                            break;
+                        }
+                    }
+
+                    // moved too far; use previous eligible entry
+                    if ((input - current_match) < 0) {
+                        can_subtract = true;
+                        break;
+                    }
+
+                    // set as largest eligible entry
+                    recent_match = current_match;
+                }
+
+                exponent++;
+            } else {
+                // fraction handler
+                float_state = true;
+
+                // move a single decimal from fraction part to integer part
+                iterations = move_to_int(input);
+                moved = moved + iterations;
+                input = input * roundf(pow(base, iterations));
+
+                // adjust for inaccuracy in floating-point representation (e.g., 0.99085 -> 1)
+                if (input < 1)
+                    input = roundf(input);
+            }
+
+            multiple = pow(base, exponent);
+        }
+        
+        input = input - recent_match;
+
+        if (float_state == true) {
+            res_array[index] = recent_match / pow(base, ((moved + 1) - iterations));
+            float_state = false;
+
+        } else {
+            res_array[index] = recent_match;
+        }
+        index++;
+        if (index == MAX_RESULT) return index - 1;
+
+        exponent = 0;
+        recent_match = 0;
+        current_match = 0;
+        can_subtract = false;
     }
 
-    free(array);
+    return index;
+}
 
-    return 0;
+static int move_to_int(float fp)
+{
+    int i = 0;
+
+    while (roundf(fp) < 1) {
+        i++;
+        fp = fp * pow(10, i);
+    }
+
+    return i;
 }
