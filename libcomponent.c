@@ -9,6 +9,8 @@ static const float E12[] = {1.0, 1.2, 1.5, 1.8, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.
 */
 int e_resistance(float orig_resistance, float *res_array)
 {
+    if (res_array == NULL) return -1;
+    
     int index = 0;
     float input = orig_resistance;
 
@@ -38,14 +40,6 @@ int e_resistance(float orig_resistance, float *res_array)
 
                     // round to nearest value if no fraction part, otherwise move to fraction handler
                     if ((input - (int) input) == 0) {
-                        if (roundf(current_match) == roundf(input)) {
-                            recent_match = current_match;
-                            can_subtract = true;
-                            input = 0;
-
-                            break;
-                        }
-                    } else {
                         if (current_match == input) {
                             recent_match = current_match;
                             can_subtract = true;
