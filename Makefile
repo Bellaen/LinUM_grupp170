@@ -1,18 +1,20 @@
+# Compiler settings
 CC = gcc
-
-MAKE_DIR = @mkdir -p
-
 CFLAGS = -Wall -g -fPIC -Wextra -std=c99
 
+# Normal command
+MAKE_DIR = @mkdir -p
+
+# Some folders to create
 LIB = lib
 BUILD = build
 
-LIB_POWER_PATH = .
-
+# Power definitions
+LIB_POWER_PATH = ./libpower
 LIB_POWER_SO = libpower.so
-
 LIB_POWER_SRC = libpower.c
 
+# Installation path for library
 LIB_INSTDIR = /usr/lib
 
 .PHONY : lib
@@ -31,7 +33,7 @@ clean :
 	rm -rf $(BUILD) $(LIB)
 	rm -f *.o
 
-$(LIB_POWER_SO) : libpower.c libpower.h
+$(LIB_POWER_SO) : $(LIB_POWER_PATH)/libpower.c $(LIB_POWER_PATH)/libpower.h
 	$(MAKE_DIR) $(BUILD) $(LIB)
-	$(CC) -c $(CFLAGS) libpower.c -o $(BUILD)/libpower.o;
+	$(CC) -c $(CFLAGS) $(LIB_POWER_PATH)/libpower.c -o $(BUILD)/libpower.o;
 	$(CC) $(CFLAGS) -shared -o $(LIB)/libpower.so $(BUILD)/libpower.o
