@@ -8,25 +8,20 @@ int main()
 {
     char conn_type = 0;
     int count = 0;
-    float* output = NULL;
-
+    float *output = NULL;
     float myResistance = 0.0;
-    float resistanceS = 0.0; //WARNING: Never used
-    float resistanceP = 0.0; //WARNING: Never used
-    float totalResistanceS = 0.0; // WARNING: Never used
-    float totalResistanceP = 0.0; // WARNING: Never used
-    float totalResistance = 0.0; 
+    float totalResistance = 0.0;
     float effect = 0.0;
 
-    do {
-        printf("Ange koppling [S|P]:\n");
-        scanf("%1c", &conn_type);
+    do
+    {
+        puts("Ange koppling [S|P]:");
+        conn_type = toupper(getchar());
 
-        conn_type = toupper(conn_type);
+    } while (conn_type != 'S' && conn_type != 'P');
 
-    } while (conn_type != 'S' || conn_type != 'P');
-
-    do {
+    do
+    {
         printf("Antal komponenter:\n");
         scanf("%d", &count);
 
@@ -42,21 +37,19 @@ int main()
         scanf("%f", &myResistance);
         output[i] = myResistance;
     }
-    
+
     totalResistance = calc_resistance(count, conn_type, output);
     // End of resistance
-
 
     // Output
     printf("Ersättningsresistans: %f ohm\n", totalResistance);
     // End of output
 
-
     // Call the power function with value from resistance.
     //effect = calc_power_r(volt, totalResistance);
 
     //printf("Effekten är: %f Watt\n", effect);
-   // End of power function
+    // End of power function
 
     free(output);
 
