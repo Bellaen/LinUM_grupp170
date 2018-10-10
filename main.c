@@ -1,29 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "resistance.h"
+#include <ctype.h>
+#include "resistance.h" // WARNING: resistance.h does not exist in current directory
+//#include "libpower.h" // WARNING: libpower.h does not exist in current directory
 
 int main()
 {
-    // User form
-    printf("Ange koppling [S|P]:\n");
-    scanf("%c", &conn);
+    char conn_type = 0;
+    int count = 0;
+    float* output = NULL;
 
-    printf("Antal komponenter:\n");
-    scanf("%d", &count);
-    // End of user form
+    float myResistance = 0.0;
+    float resistanceS = 0.0; //WARNING: Never used
+    float resistanceP = 0.0; //WARNING: Never used
+    float totalResistanceS = 0.0; // WARNING: Never used
+    float totalResistanceP = 0.0; // WARNING: Never used
+    float totalResistance = 0.0; 
+    float effect = 0.0;
 
+    do {
+        printf("Ange koppling [S|P]:\n");
+        scanf("%1c", &conn_type);
 
-    // Resistance
-    float *array = calloc(count, sizeof(float));
+        conn_type = toupper(conn_type);
 
-    for (i = 0; i < count; i++)
+    } while (conn_type != 'S' || conn_type != 'P');
+
+    do {
+        printf("Antal komponenter:\n");
+        scanf("%d", &count);
+
+    } while (count <= 0);
+
+    output = calloc(count, sizeof(float));
+    if (output == NULL)
+        exit(EXIT_FAILURE);
+
+    for (size_t i = 0; i < count; i++)
     {
-        printf("Komponent %d i ohm:\n", i + 1);
+        printf("Komponent %ld i ohm:\n", i + 1);
         scanf("%f", &myResistance);
-        array[i] = myResistance;
+        output[i] = myResistance;
     }
     
-    totalResistance = calc_resistance(count, conn, array);
+    totalResistance = calc_resistance(count, conn_type, output);
     // End of resistance
 
 
@@ -32,5 +52,13 @@ int main()
     // End of output
 
 
-    free(array);
+    // Call the power function with value from resistance.
+    //effect = calc_power_r(volt, totalResistance);
+
+    //printf("Effekten är: %f Watt\n", effect);
+   // End of power function
+
+    free(output);
+
+    return 0;
 }

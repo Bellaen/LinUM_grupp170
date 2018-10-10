@@ -1,5 +1,17 @@
 #include "resistance.h"
 #include <stdio.h>
+#include <ctype.h>
+
+// Variables
+int count;
+char conn;
+float myResistance;
+float totalResistance;
+float resistanceS;
+float resistanceP;
+float totalResistanceS = 0;
+float totalResistanceP = 0;
+int i;
 
 float calc_resistance(int count, char conn, float *array)
 {
@@ -20,8 +32,10 @@ float calc_resistance(int count, char conn, float *array)
     {
         return totalResistanceP;
     }
+
     else
     {
         return -1;
     }
+
 }
