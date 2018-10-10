@@ -12,24 +12,33 @@ int main()
     float myResistance = 0.0;
     float totalResistance = 0.0;
     float effect = 0.0;
+    // p = pointer to first non-numeric character
+    char *p, myCount[100];
 
-    do {
+    do
+    {
         puts("Ange koppling [S|P]:");
         scanf(" %c", &conn_type);
         conn_type = toupper(conn_type);
 
     } while (conn_type != 'S' && conn_type != 'P');
 
-    do {
-        puts("Antal komponenter:");
-        scanf("%d", &count);
-
-    } while (count <= 0);
+    while (fgets(myCount, sizeof(myCount), stdin))
+    {
+        count = strtol(myCount, &p, 10);
+        if (p == myCount || *p != '\n')
+        {
+            printf("Antal komponenter: ");
+        }
+        else
+            break;
+    }
 
     output = calloc(count, sizeof(float));
     if (output == NULL)
         exit(EXIT_FAILURE);
-
+    
+    // TODO: if input is non-numeric (e.g. a letter), the user should be prompted to enter a valid input (e.g. a float).
     for (size_t i = 0; i < count; i++)
     {
         printf("Komponent %ld i ohm:\n", i + 1);
