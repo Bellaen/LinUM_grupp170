@@ -13,16 +13,15 @@ int main()
     float totalResistance = 0.0;
     float effect = 0.0;
 
-    do
-    {
+    do {
         puts("Ange koppling [S|P]:");
-        conn_type = toupper(getchar());
+        scanf(" %c", &conn_type);
+        conn_type = toupper(conn_type);
 
     } while (conn_type != 'S' && conn_type != 'P');
 
-    do
-    {
-        printf("Antal komponenter:\n");
+    do {
+        puts("Antal komponenter:");
         scanf("%d", &count);
 
     } while (count <= 0);
