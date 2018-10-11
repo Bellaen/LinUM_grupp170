@@ -8,12 +8,15 @@ int main()
 {
     char conn_type = 0;
     int count = 0;
+    int i;
     float *output = NULL;
-    float myResistance = 0.0;
+    float validResistance = 0.0;
     float totalResistance = 0.0;
     float effect = 0.0;
     // p = pointer to first non-numeric character
     char *p, myCount[100];
+    char myResistance[100];
+    char *inputNotFloat;
 
     do
     {
@@ -28,7 +31,7 @@ int main()
         count = strtol(myCount, &p, 10);
         if (p == myCount || *p != '\n')
         {
-            printf("Antal komponenter: ");
+            printf("Antal komponenter:\n");
         }
         else
             break;
@@ -37,13 +40,18 @@ int main()
     output = calloc(count, sizeof(float));
     if (output == NULL)
         exit(EXIT_FAILURE);
-    
-    // TODO: if input is non-numeric (e.g. a letter), the user should be prompted to enter a valid input (e.g. a float).
+
     for (size_t i = 0; i < count; i++)
     {
-        printf("Komponent %ld i ohm:\n", i + 1);
-        scanf("%f", &myResistance);
-        output[i] = myResistance;
+        do
+        {
+            printf("Komponent %ld i ohm:\n", i + 1);
+            fgets(myResistance, sizeof(myResistance), stdin);
+            validResistance = strtof(myResistance, &inputNotFloat);
+
+        } while (validResistance == 0);
+
+        output[i] = validResistance;
     }
 
     totalResistance = calc_resistance(count, conn_type, output);
