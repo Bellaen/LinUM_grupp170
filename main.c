@@ -15,7 +15,7 @@ int main()
     float effect = 0.0;
     // p = pointer to first non-numeric character
     char *p, myCount[100];
-    char myResistance[100];
+    char myResistance[sizeof(float)];
     char *inputNotFloat;
 
     do
