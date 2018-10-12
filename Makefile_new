@@ -1,0 +1,111 @@
+# Compiler
+CC = gcc
+
+# Create directory
+MAKE_DIR = @mkdir -p
+
+# Directories to create
+BUILD = build
+LIB = lib
+BIN = bin
+
+# Installation path for binary
+USR_BIN = /usr/bin
+
+# Installation path for libraries
+USR_LIB = /usr/lib
+
+# Library Power variables
+LIB_POWER_PATH = ./libpower
+LIB_POWER_SO = libpower.so
+LIB_POWER_SRC = libpower.c
+
+# Library Resistance variables
+LIB_RESISTANCE_PATH = ./libresistance
+LIB_RESISTANCE_SO = libresistance.so
+LIB_RESISTANCE_SRC = libresistance.c
+
+# Library Component variables
+LIB_COMPONENT_PATH = ./libcomponent
+LIB_COMPONENT_SO = libcomponent.so
+LIB_COMPONENT_SRC = libcomponent.c
+
+# Electrotest variables
+ELECTROTEST_PATH = ./electrotest
+ELECTROTEST_SRC = electrotest.c
+ELECTROTEST_BIN = electrotest
+
+
+.PHONY : all
+
+all : $(LIB_RESISTANCE_SO) $(LIB_POWER_SO) $(LIB_COMPONENT_SO) $(ELECTROTEST_BIN)
+
+.PHONY : lib
+
+lib : $(LIB_RESISTANCE_SO) $(LIB_POWER_SO) $(LIB_COMPONENT_SO)
+
+
+
+$(ELECTROTEST_BIN) : $(LIB_RESISTANCE_SO) $(LIB_POWER_SO) $(LIB_COMPONENT_SO) $(BUILD)/electrotest.o
+
+	$(MAKE_DIR) $(BIN)
+	$(CC) -L$(LIB)/ -Wl,-rpath,. -lresistance -lcomponent -lpower -lm $(BUILD)/electrotest.o -o $(BIN)/$(ELECTROTEST_BIN)
+
+
+$(BUILD)/electrotest.o : $(ELECTROTEST_PATH)/$(ELECTROTEST_SRC)
+
+	$(MAKE_DIR) $(BUILD)
+	$(CC) -c $(ELECTROTEST_PATH)/$(ELECTROTEST_SRC) -o $(BUILD)/electrotest.o
+
+$(LIB_POWER_SO) : $(LIB_POWER_PATH)/$(LIB_POWER_SRC) $(LIB_POWER_PATH)/libpower.h
+        $(MAKE_DIR) $(BUILD) $(LIB)
+        $(CC) -c -fPIC $(LIB_POWER_PATH)/$(LIB_POWER_SRC) -o $(BUILD)/libpower.o;
+        $(CC) -shared -o $(LIB)/$(LIB_POWER_SO) $(BUILD)/libpower.o
+
+$(LIB_COMPONENT_SO) : $(LIB_COMPONENT_PATH)/$(LIB_COMPONENT_SRC) $(LIB_COMPONENT_PATH)/libcomponent.h
+        $(MAKE_DIR) $(BUILD) $(LIB)
+        $(CC) -c -fPIC $(LIB_COMPONENT_PATH)/$(LIB_COMPONENT_SRC) -o $(BUILD)/libcomponent.o;
+        $(CC) -shared -o $(LIB)/$(LIB_COMPONENT_SO) $(BUILD)/libcomponent.o
+
+$(LIB_RESISTANCE_SO) : $(LIB_RESISTANCE_PATH)/$(LIB_RESISTANCE_SRC) $(LIB_RESISTANCE_PATH)/libresistance.h
+        $(MAKE_DIR) $(BUILD) $(LIB)
+        $(CC) -c -fPIC $(LIB_RESISTANCE_PATH)/$(LIB_RESISTANCE_SRC) -o $(BUILD)/libresistance.o;
+        $(CC) -shared -o $(LIB)/$(LIB_RESISTANCE_SO) $(BUILD)/libresistance.o
+
+
+.PHONY : install
+
+install : all
+
+	cp -f $(BIN)/$(ELECTROTEST_BIN) $(USR_BIN)
+
+	cp -f $(LIB)/$(LIB_RESISTANCE_SO) $(USR_LIB)
+
+	cp -f $(LIB)/$(LIB_POWER_SO) $(USR_LIB)
+
+	cp -f $(LIB)/$(LIB_COMPONENT_SO) $(USR_LIB)
+
+
+.PHONY : uninstall
+
+uninstall:
+
+	rm -f $(USR_BIN)/$(ELECTROTEST_BIN)
+
+	rm -f $(USR_LIB)/$(LIB_RESISTANCE_SO)
+
+	rm -f $(USR_LIB)/$(LIB_POWER_SO)
+
+	rm -f $(USR_LIB)/$(LIB_COMPONENT_SO)
+
+
+
+.PHONY : clean
+
+clean:
+
+	rm -rf $(BUILD) $(BIN) $(LIB)
+
+
+
+
