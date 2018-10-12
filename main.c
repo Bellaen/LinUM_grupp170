@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include "resistance.h" // WARNING: resistance.h does not exist in current directory
+#include "resistance.h"
 //#include "libpower.h" // WARNING: libpower.h does not exist in current directory
 
 int main()
@@ -34,7 +34,9 @@ int main()
             printf("Antal komponenter:\n");
         }
         else
+        {
             break;
+        }
     }
 
     output = calloc(count, sizeof(float));
@@ -43,13 +45,14 @@ int main()
 
     for (size_t i = 0; i < count; i++)
     {
+
         do
         {
             printf("Komponent %ld i ohm:\n", i + 1);
             fgets(myResistance, sizeof(myResistance), stdin);
             validResistance = strtof(myResistance, &inputNotFloat);
 
-        } while (validResistance == 0);
+        } while (validResistance == 0 && myResistance == inputNotFloat);
 
         output[i] = validResistance;
     }
