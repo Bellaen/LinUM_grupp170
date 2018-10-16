@@ -18,7 +18,6 @@ int main()
     float effect,volt,power;
 
     printf("Ange spänningskälla i V: ");
-
     scanf("%f", &volt);
 
     do {
@@ -51,7 +50,7 @@ int main()
 
 
     // Output
-    printf("Ersï¿½ttningsresistans: %f ohm\n", totalResistance);
+    printf("Ersättningsresistans: %f ohm\n", totalResistance);
     // End of output
 
 
@@ -64,7 +63,7 @@ int main()
 
     effect = calc_power_r(volt, totalResistance);
 
-    printf("Effekt%f .2f Watt\n", effect;
+    printf("Effekt: %.2f Watt\n", effect;
    // End of power function
 
     free(output);
