@@ -1,5 +1,6 @@
-# Compiler
+# Compiler settings
 CC = gcc
+CFLAGS = -std=c99
 
 # Create directory
 MAKE_DIR = @mkdir -p
@@ -55,7 +56,7 @@ $(MAIN_BIN) : $(LIB_RESISTANCE_SO) $(LIB_POWER_SO) $(LIB_COMPONENT_SO) $(BUILD)/
 $(BUILD)/main.o : $(MAIN_PATH)/$(MAIN_SRC)
 
 	$(MAKE_DIR) $(BUILD)
-	$(CC) -c $(MAIN_PATH)/$(MAIN_SRC) -o $(BUILD)/main.o
+	$(CC) $(CFLAGS) -c $(MAIN_PATH)/$(MAIN_SRC) -o $(BUILD)/main.o
 
 $(LIB_POWER_SO) : $(LIB_POWER_PATH)/$(LIB_POWER_SRC) $(LIB_POWER_PATH)/libpower.h
 	$(MAKE_DIR) $(BUILD) $(LIB)

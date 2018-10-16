@@ -9,14 +9,14 @@ int main()
 {
     char conn_type = 0;         // connection type (serial or parallel)
     int count = 0;              // number of components
-    int i = 0;                  
-    float *output = NULL;       
+    int i = 0;
+    float *output = NULL;
     float validResistance = 0.0;
     float totalResistance = 0.0;
     float effect = 0.0;
-    
+
     char *p = NULL;             // p = pointer to first non-numeric character
-    char *myCount = calloc(19, sizeof(char))
+    char *myCount = calloc(19, sizeof(char));
     char *myResistance = calloc(19, sizeof(char));
     char *inputNotFloat = NULL;
     float volt, resistance;
