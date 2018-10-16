@@ -7,7 +7,7 @@
 * res_array: vektor med lämpliga E12-värden
 * return: antalet element i res_array
 */
-/*int e_resistance(float orig_resistance, float *res_array)
+int e_resistance(float orig_resistance, float *res_array)
 {
     if (res_array == NULL) return -1;
     
@@ -109,4 +109,3 @@ static int move_to_int(float fp)
 
     return i;
 }
-*/
