@@ -15,7 +15,7 @@ int main()
     float resistanceP;
     float totalResistanceS = 0;
     float totalResistanceP = 0;
-    float effect,volt;
+    float effect,volt,power;
 
     printf("Ange spänningskälla i V: ");
 
@@ -58,8 +58,7 @@ int main()
     // Call the power function with value from resistance.
     float calc_power_r(float volt, float resistance)
 {
-        float power;
-	power=volt*resistance;
+	power=(volt*volt)/resistance;
 	return power;
 }
 
