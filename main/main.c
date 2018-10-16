@@ -3,21 +3,23 @@
 #include <ctype.h>
 #include "../libresistance/libresistance.h"
 #include "../libpower/libpower.h"
-//#include "../libcomponent/libcomponent.h"
+#include "../libcomponent/libcomponent.h"
 
 int main()
 {
-    char conn_type = 0;
-    int count = 0;
-    int i;
-    float *output = NULL;
+    char conn_type = 0;         // connection type (serial or parallel)
+    int count = 0;              // number of components
+    int i = 0;                  
+    float *output = NULL;       
     float validResistance = 0.0;
     float totalResistance = 0.0;
     float effect = 0.0;
-    // p = pointer to first non-numeric character
-    char *p, myCount[100];
-    char myResistance[sizeof(float)];
-    char *inputNotFloat;
+    
+    char *p = NULL;             // p = pointer to first non-numeric character
+    char *myCount = calloc(19, sizeof(char))
+    char *myResistance = NULL;
+    // char myResistance[sizeof(float)];
+    char *inputNotFloat = NULL;
     float volt, resistance, sum, current;
 
 
@@ -43,7 +45,8 @@ int main()
     }
 
     output = calloc(count, sizeof(float));
-    if (output == NULL)
+    myResistance = calloc(count, sizeof(float));
+    if (output == NULL || myResistance == NULL)
         exit(EXIT_FAILURE);
 
     for (size_t i = 0; i < count; i++)
@@ -64,10 +67,6 @@ int main()
 
     printf("Ersättningsresistans: %f ohm\n", totalResistance);
 
-
-
-
-
     printf("Ange volt: ");
 
     scanf("%f", &volt);
@@ -80,8 +79,19 @@ int main()
 
     printf("Power är: %.2f\n", sum);
 
+    // Calculate E12 replacement components
+    count = e_resistance(totalResistance, output);
+    if (count > 0 && output != NULL) {
+        for(size_t i = 0; i < count; i++) {
+            printf("%G\n", output[i]);
+        }
+    } else {
+        puts("");
+    }
 
     free(output);
+    free(myCount);
+    free(myResistance);
 
     return 0;
 }
