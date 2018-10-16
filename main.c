@@ -15,6 +15,8 @@ int main()
     float resistanceP;
     float totalResistanceS = 0;
     float totalResistanceP = 0;
+    float effect,volt;
+
 
     do {
         printf("Ange koppling [S|P]:\n");
@@ -51,6 +53,18 @@ int main()
 
 
     // Call the power function with value from resistance.
+    float calc_power_r(float volt, float resistance)
+
+{
+
+        float power;
+
+        power=volt*resistance;
+
+        return power;
+
+}
+
     effect = calc_power_r(volt, totalResistance);
 
     printf("Effekten �r: %f Watt\n", effect;
