@@ -48,17 +48,17 @@ lib : $(LIB_RESISTANCE_SO) $(LIB_POWER_SO) $(LIB_COMPONENT_SO)
 
 $(LIB_POWER_SO) : $(LIB_POWER_PATH)/$(LIB_POWER_SRC) $(LIB_POWER_PATH)/libpower.h
 	$(MAKE_DIR) $(BUILD) $(LIB)
-	$(CC) -c -fPIC $(LIB_POWER_PATH)/$(LIB_POWER_SRC) -o $(BUILD)/libpower.o;
+	$(CC) -c $(CFLAGS) -fPIC $(LIB_POWER_PATH)/$(LIB_POWER_SRC) -o $(BUILD)/libpower.o;
 	$(CC) -shared -o $(LIB)/$(LIB_POWER_SO) $(BUILD)/libpower.o
 
 $(LIB_COMPONENT_SO) : $(LIB_COMPONENT_PATH)/$(LIB_COMPONENT_SRC) $(LIB_COMPONENT_PATH)/libcomponent.h
 	$(MAKE_DIR) $(BUILD) $(LIB)
-	$(CC) -c -fPIC $(LIB_COMPONENT_PATH)/$(LIB_COMPONENT_SRC) -o $(BUILD)/libcomponent.o;
+	$(CC) -c $(CFLAGS) -fPIC $(LIB_COMPONENT_PATH)/$(LIB_COMPONENT_SRC) -o $(BUILD)/libcomponent.o;
 	$(CC) -shared -o $(LIB)/$(LIB_COMPONENT_SO) $(BUILD)/libcomponent.o
 
 $(LIB_RESISTANCE_SO) : $(LIB_RESISTANCE_PATH)/$(LIB_RESISTANCE_SRC) $(LIB_RESISTANCE_PATH)/libresistance.h
 	$(MAKE_DIR) $(BUILD) $(LIB)
-	$(CC) -c -fPIC $(LIB_RESISTANCE_PATH)/$(LIB_RESISTANCE_SRC) -o $(BUILD)/libresistance.o;
+	$(CC) -c $(CFLAGS) -fPIC $(LIB_RESISTANCE_PATH)/$(LIB_RESISTANCE_SRC) -o $(BUILD)/libresistance.o;
 	$(CC) -shared -o $(LIB)/$(LIB_RESISTANCE_SO) $(BUILD)/libresistance.o
 
 $(MAIN_BIN) : $(LIB_RESISTANCE_SO) $(LIB_POWER_SO) $(LIB_COMPONENT_SO) $(BUILD)/main.o
