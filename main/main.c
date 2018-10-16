@@ -19,8 +19,10 @@ int main()
     char *myCount = calloc(19, sizeof(char))
     char *myResistance = calloc(19, sizeof(char));
     char *inputNotFloat = NULL;
-    float volt, resistance, sum, current;
+    float volt, resistance, effect;
 
+	printf("Ange spänningskälla i V: ");
+    	scanf("%f", &volt);
 
     do
     {
@@ -66,17 +68,15 @@ int main()
 
     printf("Ersättningsresistans: %f ohm\n", totalResistance);
 
-    printf("Ange volt: ");
+    float calc_power_r(float volt, float resistance)
+{
+        power=(volt*volt)/resistance;
+        return power;
+}
 
-    scanf("%f", &volt);
+    effect = calc_power_r(volt, totalResistance);
 
-    printf("Ange resistans: ");
-
-    scanf("%f", &resistance);
-
-    sum = calc_power_r(volt, resistance);
-
-    printf("Power är: %.2f\n", sum);
+    printf("Effekt: %.2f Watt\n", effect;
 
     // Calculate E12 replacement components
     count = e_resistance(totalResistance, output);
