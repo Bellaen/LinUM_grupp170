@@ -17,8 +17,7 @@ int main()
     
     char *p = NULL;             // p = pointer to first non-numeric character
     char *myCount = calloc(19, sizeof(char))
-    char *myResistance = NULL;
-    // char myResistance[sizeof(float)];
+    char *myResistance = calloc(19, sizeof(char));
     char *inputNotFloat = NULL;
     float volt, resistance, sum, current;
 
