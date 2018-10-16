@@ -43,7 +43,7 @@ int main(void)
 
 	sum=calc_power_r(volt, resistance);
 
-	printf("Power är: %f\n", sum);
+	printf("Power är: %.2f\n", sum);
 
 	return 0;
 
