@@ -19,7 +19,7 @@ int main()
     char *myCount = calloc(19, sizeof(char))
     char *myResistance = calloc(19, sizeof(char));
     char *inputNotFloat = NULL;
-    float volt, resistance, effect;
+    float volt, effect, resistance;
 
 	printf("Ange spänningskälla i V: ");
     	scanf("%f", &volt);
@@ -70,7 +70,11 @@ int main()
 
     float calc_power_r(float volt, float resistance)
 {
-        power=(volt*volt)/resistance;
+	float power = 0;
+	if (resistance > 0)	// Unvik att resistansen �r 0.
+        {
+        power = (volt * volt / resistance);
+        }
         return power;
 }
 
