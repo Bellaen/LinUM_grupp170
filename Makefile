@@ -46,18 +46,6 @@ all : $(LIB_RESISTANCE_SO) $(LIB_POWER_SO) $(LIB_COMPONENT_SO) $(MAIN_BIN)
 lib : $(LIB_RESISTANCE_SO) $(LIB_POWER_SO) $(LIB_COMPONENT_SO)
 
 
-
-$(MAIN_BIN) : $(LIB_RESISTANCE_SO) $(LIB_POWER_SO) $(LIB_COMPONENT_SO) $(BUILD)/main.o
-
-	$(MAKE_DIR) $(BIN)
-	$(CC) -L$(LIB)/ -Wl,-rpath,. -lresistance -lcomponent -lpower -lm $(BUILD)/main.o -o $(BIN)/$(MAIN_BIN)
-
-
-$(BUILD)/main.o : $(MAIN_PATH)/$(MAIN_SRC)
-
-	$(MAKE_DIR) $(BUILD)
-	$(CC) $(CFLAGS) -c $(MAIN_PATH)/$(MAIN_SRC) -o $(BUILD)/main.o
-
 $(LIB_POWER_SO) : $(LIB_POWER_PATH)/$(LIB_POWER_SRC) $(LIB_POWER_PATH)/libpower.h
 	$(MAKE_DIR) $(BUILD) $(LIB)
 	$(CC) -c -fPIC $(LIB_POWER_PATH)/$(LIB_POWER_SRC) -o $(BUILD)/libpower.o;
@@ -72,6 +60,16 @@ $(LIB_RESISTANCE_SO) : $(LIB_RESISTANCE_PATH)/$(LIB_RESISTANCE_SRC) $(LIB_RESIST
 	$(MAKE_DIR) $(BUILD) $(LIB)
 	$(CC) -c -fPIC $(LIB_RESISTANCE_PATH)/$(LIB_RESISTANCE_SRC) -o $(BUILD)/libresistance.o;
 	$(CC) -shared -o $(LIB)/$(LIB_RESISTANCE_SO) $(BUILD)/libresistance.o
+
+$(MAIN_BIN) : $(LIB_RESISTANCE_SO) $(LIB_POWER_SO) $(LIB_COMPONENT_SO) $(BUILD)/main.o
+
+	$(MAKE_DIR) $(BIN)
+	$(CC) -L$(LIB)/ -Wl,-rpath,../$(LIB) $(BUILD)/main.o -o $(BIN)/$(MAIN_BIN) -lm -lresistance -lcomponent -lpower
+
+$(BUILD)/main.o : $(MAIN_PATH)/$(MAIN_SRC)
+
+	$(MAKE_DIR) $(BUILD)
+	$(CC) $(CFLAGS) -c $(MAIN_PATH)/$(MAIN_SRC) -o $(BUILD)/main.o
 
 
 .PHONY : install
