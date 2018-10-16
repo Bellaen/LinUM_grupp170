@@ -1,13 +1,13 @@
 #include "libcomponent.h"
 
-//static const float E12[] = {1.0, 1.2, 1.5, 1.8, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.8, 8.2};
+static const float E12[] = {1.0, 1.2, 1.5, 1.8, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.8, 8.2};
 
 /*
 * origo_resistance: Ersättningsresistans
 * res_array: vektor med lämpliga E12-värden
 * return: antalet element i res_array
 */
-/*int e_resistance(float orig_resistance, float *res_array)
+int e_resistance(float orig_resistance, float *res_array)
 {
     if (res_array == NULL) return -1;
     
@@ -109,4 +109,3 @@ static int move_to_int(float fp)
 
     return i;
 }
-*/
