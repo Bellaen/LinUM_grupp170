@@ -84,6 +84,7 @@ install : all
 
 	cp -f $(LIB)/$(LIB_COMPONENT_SO) $(USR_LIB)
 
+	sudo make clean
 
 .PHONY : uninstall
 
@@ -96,7 +97,6 @@ uninstall:
 	rm -f $(USR_LIB)/$(LIB_POWER_SO)
 
 	rm -f $(USR_LIB)/$(LIB_COMPONENT_SO)
-
 
 
 .PHONY : clean

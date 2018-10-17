@@ -68,16 +68,7 @@ int main()
 
     printf("Ersättningsresistans: %f ohm\n", totalResistance);
 
-//    float calc_power_r(float volt, float resistance)
-//{
-//	float power = 0;
-//	if (resistance > 0)	// Unvik att resistansen Ãr 0.
-//        {
-//        power = (volt * volt / resistance);
-//        }
-//        return power;
-//}
-
+   // Calculate the Effect in Watts.
     effect = calc_power_r(volt, totalResistance);
 
     printf("Effekt: %.2f Watt\n", effect);
