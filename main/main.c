@@ -21,7 +21,7 @@ int main()
     char *inputNotFloat = NULL;
     float volt, resistance;
 
-	printf("Ange sp√§nningsk√§lla i V: ");
+	printf("Ange sp‰nningsk‰lla i V: ");
     	scanf("%f", &volt);
 
     do
@@ -66,7 +66,7 @@ int main()
 
     totalResistance = calc_resistance(count, conn_type, output);
 
-    printf("Ers√§ttningsresistans: %f ohm\n", totalResistance);
+    printf("Ers‰ttningsresistans: %f ohm\n", totalResistance);
 
 //    float calc_power_r(float volt, float resistance)
 //{

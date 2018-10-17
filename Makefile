@@ -54,7 +54,7 @@ $(LIB_POWER_SO) : $(LIB_POWER_PATH)/$(LIB_POWER_SRC) $(LIB_POWER_PATH)/libpower.
 $(LIB_COMPONENT_SO) : $(LIB_COMPONENT_PATH)/$(LIB_COMPONENT_SRC) $(LIB_COMPONENT_PATH)/libcomponent.h
 	$(MAKE_DIR) $(BUILD) $(LIB)
 	$(CC) -c $(CFLAGS) -fPIC $(LIB_COMPONENT_PATH)/$(LIB_COMPONENT_SRC) -o $(BUILD)/libcomponent.o;
-	$(CC) -shared -o $(LIB)/$(LIB_COMPONENT_SO) $(BUILD)/libcomponent.o
+	$(CC) -shared -o $(LIB)/$(LIB_COMPONENT_SO) $(BUILD)/libcomponent.o -lm
 
 $(LIB_RESISTANCE_SO) : $(LIB_RESISTANCE_PATH)/$(LIB_RESISTANCE_SRC) $(LIB_RESISTANCE_PATH)/libresistance.h
 	$(MAKE_DIR) $(BUILD) $(LIB)
