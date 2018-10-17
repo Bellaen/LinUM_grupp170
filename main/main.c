@@ -66,7 +66,7 @@ int main()
 
     totalResistance = calc_resistance(count, conn_type, output);
 
-    printf("Ersättningsresistans: %f ohm\n", totalResistance);
+    printf("Ersättningsresistans: %.1f ohm\n", totalResistance);
 
    // Calculate the Effect in Watts.
     effect = calc_power_r(volt, totalResistance);
