@@ -34,7 +34,7 @@ LIB_COMPONENT_SRC = libcomponent.c
 # Main variables
 MAIN_PATH = ./main
 MAIN_SRC = main.c
-MAIN_BIN = main
+MAIN_BIN = electrotest
 
 
 .PHONY : all
