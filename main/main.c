@@ -76,7 +76,7 @@ int main()
     // Calculate E12 replacement components
     count = e_resistance(totalResistance, output);
     if (count > 0 && output != NULL) {
-        printf("Ersättningsreistanser i E12-serien kopplade i serie:\n");
+        printf("Ersättningsresistanser i E12-serien kopplade i serie:\n");
         for(size_t i = 0; i < count; i++) {
             printf("%G\n", output[i]);
         }
