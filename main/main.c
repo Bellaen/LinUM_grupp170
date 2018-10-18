@@ -21,7 +21,7 @@ int main()
     char *inputNotFloat = NULL;
     float volt, resistance;
 
-	printf("Ange sp‰nningsk‰lla i V: ");
+	printf("Ange spÔøΩnningskÔøΩlla i V: ");
     	scanf("%f", &volt);
 
     do
@@ -66,7 +66,7 @@ int main()
 
     totalResistance = calc_resistance(count, conn_type, output);
 
-    printf("Ers‰ttningsresistans: %.1f ohm\n", totalResistance);
+    printf("ErsÔøΩttningsresistans: %.1f ohm\n", totalResistance);
 
    // Calculate the Effect in Watts.
     effect = calc_power_r(volt, totalResistance);
@@ -76,6 +76,7 @@ int main()
     // Calculate E12 replacement components
     count = e_resistance(totalResistance, output);
     if (count > 0 && output != NULL) {
+        printf("Ers√§ttningsreistanser i E12-serien kopplade i serie:\n");
         for(size_t i = 0; i < count; i++) {
             printf("%G\n", output[i]);
         }
