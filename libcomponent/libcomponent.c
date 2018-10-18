@@ -90,7 +90,7 @@ int e_resistance(float orig_resistance, float *res_array)
             res_array[index] = recent_match;
         }
         index++;
-        if (index == MAX_RESULT) return index - 1;
+        if (index == MAX_RESULT + 1) return index - 1;
 
         exponent = 0;
         recent_match = 0;
