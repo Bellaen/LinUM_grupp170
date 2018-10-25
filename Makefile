@@ -49,7 +49,7 @@ $(LIB_POWER_SO) : $(LIB_POWER_PATH)/$(LIB_POWER_SRC) $(LIB_POWER_PATH)/libpower.
 .PHONY : test
 test: $(LIB_POWER_SO) $(BUILD)/maintest.o
 	$(MAKE_DIR) $(BIN)
-	$(CC) -L$(LIB)/ -Wl,-rpath,. -lpower $(BUILD)/maintest.o -o $(BIN)/testprog
+	$(CC) -L$(LIB)/ -Wl,-rpath,../$(LIB) $(BUILD)/maintest.o -o $(BIN)/testprog -lpower
 
 $(BUILD)/maintest.o : $(LIB_POWER_PATH)/maintest.c
 	$(CC) -c $(LIB_POWER_PATH)/maintest.c -o $(BUILD)/maintest.o
