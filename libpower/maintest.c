@@ -8,7 +8,7 @@ int main(void)
 
 {
 
-	float sum,effect;
+	float effect_r,effect_i;
 	printf("Ange volt: ");
 
 	scanf("%f", &volt);
@@ -17,18 +17,18 @@ int main(void)
 
 	scanf("%f", &resistance);
 
-	printf("Ange Ström i A: ");
+	printf("Ange StrÃ¶m i A: ");
 
 	scanf("%f", &current);
 
 
-	effect=calc_power_i(volt, current);
+	effect_i=calc_power_i(volt, current);
 
-	printf("Effekt %.2f\n",effect);
+	printf("Effekt %.2f\n",effect_i);
 
-	sum=calc_power_r(volt, resistance);
+	effect_r=calc_power_r(volt, resistance);
 
-	printf("Power %.2f\n",sum);
+	printf("Power %.2f\n",effect_r);
 
 	return 0;
 

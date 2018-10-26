@@ -43,7 +43,7 @@ clean :
 
 $(LIB_POWER_SO) : $(LIB_POWER_PATH)/$(LIB_POWER_SRC) $(LIB_POWER_PATH)/libpower.h
 	$(MAKE_DIR) $(BUILD) $(LIB)
-	$(CC) -c $(CFLAGS) $(LIB_POWER_PATH)/$(LIB_POWER_SRC) -o $(BUILD)/libpower.o;
+	$(CC) -c -fPIC $(LIB_POWER_PATH)/$(LIB_POWER_SRC) -o $(BUILD)/libpower.o;
 	$(CC) -shared -o $(LIB)/libpower.so $(BUILD)/libpower.o
 
 .PHONY : test
