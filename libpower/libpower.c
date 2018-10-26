@@ -18,8 +18,8 @@ float calc_power_r(float volt, float resistance)
 
 float calc_power_i(float volt, float current)
 {
-	float power;
-	power=(volt * current);
+	float power = 0;
+	power = (volt * current);
 
 	return power;
 }
