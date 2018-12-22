@@ -13,6 +13,10 @@ static const float E12[] = {1.0, 1.2, 1.5, 1.8, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.
 int e_resistance(float orig_resistance, float *res_array)
 {
     if (res_array == NULL) return -1;
+    if (orig_resistance == 0) {
+        res_array[0] = 0;
+        return 1;
+    }
     
     int index = 0;
     float input = orig_resistance;
